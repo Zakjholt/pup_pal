@@ -1,11 +1,12 @@
-nav ul {
+ul {
   list-style: none;
   padding-left: 0;
 }
-nav li {
-  dispaly: inline;
+li {
+  display: inline-block;
 }
-nav a {
+.btn {
   text-decoration: none;
-  color: green;
+  background-color: #308040;
+  color: white;
 }
