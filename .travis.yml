@@ -3,7 +3,7 @@ node_js: node
 deploy:
   provider: heroku
   api_key:
-    secure: "f57544ad-2a8b-4487-aa75-4a30fae2dd3e"
-  app: "Pup Pal"
+    secure: f57544ad-2a8b-4487-aa75-4a30fae2dd3e
+  app: mighty-tundra-10914
   on:
-    repo: "https://github.com/Zakjholt/pup_pal.git"
+    repo: Zakjholt/pup_pal
