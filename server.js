@@ -20,6 +20,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
 
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -29,10 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(express.static(__dirname + '/public'));
-
 require('./app/routes.js')(app, passport);
-
 
 app.listen(process.env.PORT || 8080, function() {
     console.log("server is running at http://localhost:" + port);
