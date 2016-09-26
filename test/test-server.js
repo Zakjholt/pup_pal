@@ -5,7 +5,7 @@ var server = require('../server.js');
 var should = chai.should();
 var app = server.app;
 var storage = server.storage;
-chai.user(chaiHttp);
+chai.use(chaiHttp);
 
 describe('index page', function() {
     it('exists', function(done) {

@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: "f57544ad-2a8b-4487-aa75-4a30fae2dd3e"
+  app: "Pup Pal"
+  on:
+    repo: "https://github.com/Zakjholt/pup_pal.git"
