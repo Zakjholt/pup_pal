@@ -1,0 +1,14 @@
+{
+  "name": "pup_pal",
+  "version": "1.0.0",
+  "description": "app for new dog owners designed to help build good habits",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zak holt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
