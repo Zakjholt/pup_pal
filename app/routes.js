@@ -16,8 +16,17 @@ module.exports = function(app, passport) {
         });
     });
 
-    //app.post('/signup', passport stuff);
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect: '/onboard', // redirect to main
+        failureRedirect: '/signup', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }));
 
+    app.get('/onboard', isLoggedIn, function(req, res) {
+        res.render('onboard.ejs', {
+            user: req.user
+        });
+    });
 
     app.get('/main', isLoggedIn, function(req, res) {
         res.render('main.ejs', {
