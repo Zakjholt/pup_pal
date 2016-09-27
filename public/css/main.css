@@ -1,3 +1,6 @@
+body {
+  padding-top: 10px;
+}
 ul {
   list-style: none;
   padding-left: 0;
@@ -5,8 +8,38 @@ ul {
 li {
   display: inline-block;
 }
+nav {
+  float: right;
+  margin-right: 20px;
+}
+.logo {
+  width: 150px;
+  margin-left: 20px;
+}
+.logo:hover {
+  background: #33658a;
+}
 .btn {
   text-decoration: none;
-  background-color: #308040;
-  color: white;
+  background-color: #33658a;
+  color: #e0fbfc;
+  padding: 4px 10px;
+}
+.submit {
+  display: block;
+  margin: 10px auto;
+}
+
+.trick {
+  box-sizing: border-box;
+  height: 100px;
+  width: 20%;
+  margin: 10px 2%;
+}
+
+.meal {
+  box-sizing: border-box;
+  width: 94%;
+  height: 100px;
+  margin: 10px 2%;
 }

@@ -1,0 +1,38 @@
+<% include includes/header.ejs %>
+<h2>Main</h2>
+<div class="row">
+  <a href="/logout">Logout</a>
+  <a href="/onboard">Onboard</a>
+  <a href="/settings">Account Settings</a>
+</div>
+
+<div class="row">
+  <button class="btn trick">Sit</button>
+  <button class="btn trick">Down</button>
+  <button class="btn trick">Stay</button>
+  <button class="btn trick">Come</button>
+</div>
+
+ <div class="row"><button class="btn meal">Meal</button>
+ </div>
+
+
+
+<div class="row">
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-12">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                    <p>
+                        <strong>id</strong>: <%= user._id %><br>
+                        <strong>email</strong>: <%= user.local.email %><br>
+                        <strong>Name</strong>: <%= user.local.palName %><br>
+                        <strong>Dog's Name</strong>: <%= user.local.pupName %>
+                    </p>
+
+            </div>
+        </div>
+
+    </div>
+<% include includes/footer.ejs %>
