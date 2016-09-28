@@ -1,5 +1,5 @@
 body {
-  padding-top: 10px;
+  padding-top: 70px;
 }
 ul {
   list-style: none;
@@ -35,6 +35,7 @@ nav {
   height: 100px;
   width: 20%;
   margin: 10px 2%;
+  position: relative;
 }
 
 .meal {
@@ -42,4 +43,13 @@ nav {
   width: 94%;
   height: 100px;
   margin: 10px 2%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  border-radius: 0 0 5% 5%;
 }

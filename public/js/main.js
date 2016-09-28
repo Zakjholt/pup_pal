@@ -1,4 +1,6 @@
-$(document).ready(function() {});
+$(document).ready(function() {
+    $('.section').hide();
+});
 
 $('.meal').click(function() {
     $.ajax({
@@ -11,10 +13,17 @@ $('.meal').click(function() {
 });
 
 $('.trick').click(function() {
-    var trick = $(this).text().toLowerCase();
+    var trick = $(this).find('.key').text().toLowerCase();
     console.log(trick);
     $.ajax({
         url: '/tricks/' + trick,
         type: 'POST'
     });
+    $(this).find('.count').text((parseInt($(this).find('.count').text()) + 1));
+});
+
+$('.navbar-btn').click(function() {
+    var selectedSection = $(this).attr('id');
+    $('.section').hide();
+    $('.' + selectedSection).fadeIn();
 });

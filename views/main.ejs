@@ -1,24 +1,51 @@
 <% include includes/header.ejs %>
 <h2>Dashboard</h2>
-<div class="row">
-  <a href="/logout">Logout</a>
-  <a href="/onboard">Onboard</a>
-  <a href="/settings">Account Settings</a>
+  <div class="container">
+    <ul>
+      <li><button id="training" class="btn navbar-btn">Training</button></li>
+      <li><button id="meal-tracking" class="btn navbar-btn">Meal Tracking</button></li>
+      <li><button id="care-schedule" class="btn navbar-btn">Pet Care Schedule</button></li>
+      <li><button id="account-info" class="btn navbar-btn">Account Info</button></li>
+    </ul>
+  </div>
+
+  <div class="row section account-info">
+    <a href="/logout">Logout</a>
+    <a href="/onboard">Onboard</a>
+    <a href="/settings">Account Settings</a>
+  </div>
+
+
+
+<div class="row section training">
+  <button class="btn trick"><span class="key">Sit</span>
+<div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.sit ? user.tricks.sit : 0 %></span></div>
+  </button>
+  <button class="btn trick"><span class="key">Down</span>
+<div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.down ? user.tricks.down : 0 %></span></div>
+  </button>
+  <button class="btn trick"><span class="key">Stay</span>
+  <div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.stay ? user.tricks.stay : 0 %></span></div>
+  </button>
+  <button class="btn trick"><span class="key">Come</span>
+  <div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.come ? user.tricks.come : 0 %></span></div>
+</button>
 </div>
 
-<div class="row">
-  <button class="btn trick">Sit</button>
-  <button class="btn trick">Down</button>
-  <button class="btn trick">Stay</button>
-  <button class="btn trick">Come</button>
+ <div class="row section meal-tracking">
+   <button class="btn meal">Meal <br> Last Meal: <span class="last-meal"> <%= user.mealTime ? moment(user.mealTime).format("dddd, h:mm A") : "No meals logged yet today!"%> </span></button>
+
+  <div class="well">
+    <p>
+     <strong>Take <%= user.pupName %> out at</strong>: <span class="countdown"> <%=user.mealTime ? moment(user.mealTime).add(20, 'minutes').format('h:mm A') : "Log a meal to get a reminder" %></span>
+    </p>
+  </div>
+
 </div>
 
- <div class="row"><button class="btn meal">Meal <br> Last Meal: <span class="last-meal"> <%= moment(user.mealTime).format("dddd, h:mm A") %> </span></button>
- </div>
 
 
-
-<div class="row">
+<div class="row section account-info">
   <!-- LOCAL INFORMATION -->
   <div class="col-sm-12">
       <div class="well">
@@ -26,7 +53,6 @@
                   <strong>email</strong>: <%= user.local.email %><br>
                   <strong>Name</strong>: <%= user.palName %><br>
                   <strong>Dog's Name</strong>: <%= user.pupName %><br>
-                  <strong>Take <%= user.pupName %> out at</strong>: <span class="countdown"><%= moment(user.mealTime).add(20, 'minutes').format('h:mm A') %></span> 
               </p>
 
       </div>
