@@ -5,15 +5,17 @@ var userSchema = mongoose.Schema({
     local: {
         email: String,
         password: String,
-        palName: String,
-        pupName: String
     },
     google: {
         id: String,
         token: String,
         email: String,
         name: String
-    }
+    },
+    palName: String,
+    pupName: String,
+    tricks: {},
+    mealTime: Date,
 });
 
 userSchema.methods.generateHash = function(password) {

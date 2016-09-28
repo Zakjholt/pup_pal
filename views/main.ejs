@@ -1,5 +1,5 @@
 <% include includes/header.ejs %>
-<h2>Main</h2>
+<h2>Dashboard</h2>
 <div class="row">
   <a href="/logout">Logout</a>
   <a href="/onboard">Onboard</a>
@@ -13,26 +13,25 @@
   <button class="btn trick">Come</button>
 </div>
 
- <div class="row"><button class="btn meal">Meal</button>
+ <div class="row"><button class="btn meal">Meal <br> Last Meal: <span class="last-meal"> <%= moment(user.mealTime).format("dddd, h:mm A") %> </span></button>
  </div>
 
 
 
 <div class="row">
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-12">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+  <!-- LOCAL INFORMATION -->
+  <div class="col-sm-12">
+      <div class="well">
+              <p>
+                  <strong>email</strong>: <%= user.local.email %><br>
+                  <strong>Name</strong>: <%= user.palName %><br>
+                  <strong>Dog's Name</strong>: <%= user.pupName %><br>
+                  <strong>Take <%= user.pupName %> out at</strong>: <span class="countdown"><%= moment(user.mealTime).add(20, 'minutes').format('h:mm A') %></span> 
+              </p>
 
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>Name</strong>: <%= user.local.palName %><br>
-                        <strong>Dog's Name</strong>: <%= user.local.pupName %>
-                    </p>
-
-            </div>
-        </div>
-
+      </div>
     </div>
+</div>
+<script src="js/moment.min.js"></script>
+<script src="js/main.js" charset="utf-8"></script>
 <% include includes/footer.ejs %>

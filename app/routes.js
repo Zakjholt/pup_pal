@@ -1,4 +1,5 @@
 var User = require('./models/user');
+
 module.exports = function(app, passport) {
 
     app.get('/', function(req, res) {
@@ -35,17 +36,50 @@ module.exports = function(app, passport) {
         });
     });
 
+    //Process the onboarding user info (Your name and dog's name)
     app.post('/onboard', function(req, res) {
         console.log(req.body);
-        console.log(req.user.local);
+        console.log(req.user);
         User.findOneAndUpdate({
-            _id: req.user.local._id
+            '_id': req.user._id
         }, {
-            palName: req.body.palName,
-            petName: req.body.petName
-        }, function(user) {
-            res.json(user);
+            $set: {
+                'palName': req.body.palName,
+                'pupName': req.body.pupName
+            }
+        }, function() {
+            res.sendStatus(204);
         });
+    });
+
+    //Handling meal time posts
+    app.post('/meal', function(req, res) {
+        console.log(req.body);
+        User.findOneAndUpdate({
+            '_id': req.user._id
+        }, {
+            $currentDate: {
+                'mealTime': true
+            },
+        }, function() {
+            res.sendStatus(204);
+        });
+    });
+
+    //Handle trick posts
+    app.post('/tricks/:trick', function(req, res) {
+        var trick = req.params.trick;
+        var field = 'tricks.' + trick;
+        User.findOneAndUpdate({
+                '_id': req.user._id
+            }, {
+                $inc: {
+                    [field]: 1
+                }
+            },
+            function() {
+                res.sendStatus(204);
+            });
     });
 
     app.get('/main', isLoggedIn, function(req, res) {
