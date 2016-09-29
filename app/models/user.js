@@ -15,7 +15,8 @@ var userSchema = mongoose.Schema({
     palName: String,
     pupName: String,
     tricks: {},
-    mealTime: Date,
+    trickTime: Date,
+    mealTime: Date
 });
 
 userSchema.methods.generateHash = function(password) {

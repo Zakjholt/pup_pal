@@ -50,11 +50,10 @@
   <div class="col-sm-12">
       <div class="well">
               <p>
-                  <strong>email</strong>: <%= user.local.email %><br>
+                  <strong>email</strong>: <%= user.local.email || user.google.email %><br>
                   <strong>Name</strong>: <%= user.palName %><br>
                   <strong>Dog's Name</strong>: <%= user.pupName %><br>
               </p>
-
       </div>
     </div>
 </div>
