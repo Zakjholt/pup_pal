@@ -1,7 +1,14 @@
 $('.meal').click(function() {
+    var sendText = false;
+    if ($('#send-text-message').is(':checked')) {
+        sendText = true;
+    }
     $.ajax({
         url: '/meal',
-        type: 'POST'
+        type: 'POST',
+        data: {
+            sendText: sendText
+        }
     });
     //update the last meal time on the current page
     $('.last-meal').text(moment(new Date()).format("dddd, h:mm A"));
@@ -76,6 +83,8 @@ $('.training').on('click', '.delete-trick', function(event) {
 });
 
 $(document).ready(function() {
+    $('.training').fadeIn();
+    $('#training').addClass('selected');
     var user = $.parseJSON($('#user').val());
     makeCards(user.tricks);
 });

@@ -4,7 +4,7 @@
 
     <h2>Dashboard</h2>
     <div class='dash-controls'>
-        <div class='well container'>
+        <div>
             <ul>
                 <li><button id='training' class='btn navbar-btn'>Training</button></li>
                 <li><button id='meal-tracking' class='btn navbar-btn'>Meal Tracking</button></li>
@@ -21,7 +21,9 @@
         <p>
             Here you can track your pet's daily trick training progress! We've loaded up four basic commands to get you started. Just click the buttons to mark successful attempts! The counters will reset daily.
         </p>
-        <div class="col-sm-12 well"><input type="text" class="trick-name"><button class="btn btn-default add-trick">Add a Trick</button>
+        <div class="col-sm-12 ">
+        <input type="text" class="trick-name" placeholder="Roll Over">
+        <button class="btn btn-default add-trick">Add a Trick</button>
         </div>
     </section>
 
@@ -41,16 +43,19 @@
         </p>
         <button class='btn meal'>Meal <br> Last Meal: <span class='last-meal'> <%= user.mealTime ? moment(user.mealTime).format('dddd, h:mm A') : 'No meals logged yet today!'%> </span></button>
 
-        <div class='well'>
+        <div class=''>
             <p>
                 <strong>Take <%= user.pupName %> out at</strong>: <span class='countdown'> <%=user.mealTime ? moment(user.mealTime).add(20, 'minutes').format('h:mm A') : 'Log a meal to get a reminder' %></span>
+            </p>
+            <p>
+              <label><input type="checkbox" id="send-text-message" value="Text Message"> Send me a text when it's time to take <%= user.pupName %> out</label>
             </p>
         </div>
 
     </section>
 
 
-    <section class='row well pet-care'>
+    <section class='row pet-care'>
         <button class='pet-care-button btn-default'>Vaccination Schedule</button>
         <button class='pet-care-button btn-default'>Grooming Schedule</button>
         <button class='pet-care-button btn-default'>Food Reviews</button>
@@ -115,11 +120,10 @@
         <div>
             <a href='/logout'>Logout</a>
             <a href='/onboard'>Onboard</a>
-            <a href='/settings'>Account Settings</a>
 
         </div>
         <div class='col-sm-12'>
-            <div class='well'>
+            <div class=''>
                 <p>
                     <strong>Name</strong>:
                     <%= user.palName %><br>

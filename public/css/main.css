@@ -30,6 +30,8 @@ nav {
     background-color: #33658a;
     color: #e0fbfc;
     padding: 10px 50px;
+
+    border: none;
 }
 
 button {
@@ -81,6 +83,12 @@ p {
     margin-top: 10px;
 }
 
+.trick-name {
+    text-align: center;
+    padding: 15px;
+    margin: 10px auto;
+}
+
 .trick {
     box-sizing: border-box;
     height: 100px;
@@ -116,4 +124,62 @@ p {
 
 .trick-name {
     margin-right: 30px;
+}
+
+.pet-care-button {
+    margin: 15px;
+    padding: 10px;
+}
+
+.google-sign-in {
+    background-color: #dd4b39;
+    margin-top: 20px;
+}
+
+body {
+    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dogs.jpeg');
+    color: white;
+}
+
+.pet-care li {
+  color: black;
+}
+
+.pet-care a {
+  color: red;
+}
+
+/*Tablet/Small laptop*/
+
+@media (max-width: 850px) {
+    .trick-container {
+        width: 45%
+    }
+    .container {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+}
+
+
+/*Mobile*/
+
+@media (max-width: 500px) {
+  .container {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+    .trick-container {
+        width: 100%
+    }
+    .delete-trick {
+        display: block;
+    }
+    .trick-name {
+        width: 80%;
+        margin: auto;
+    }
+    .add-trick {
+        margin-top: 10px;
+    }
 }
