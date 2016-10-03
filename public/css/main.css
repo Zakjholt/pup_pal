@@ -1,15 +1,15 @@
-    body {
+
+/**********
+General
+**********/
+
+body {
     padding-top: 25px;
     font-family: 'Open Sans', sans-serif;
     margin: 0 auto;
-}
-
-header {
-    margin: 0 15px;
-}
-
-h2, h3 {
-    font-family: 'Roboto', sans-serif;
+    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dog.jpeg');
+    color: white;
+    background-position: center top;
 }
 
 ul {
@@ -19,20 +19,6 @@ ul {
 
 li {
     display: inline-block;
-}
-
-nav {
-    float: right;
-    margin-right: 20px;
-}
-
-.logo {
-    width: 150px;
-    margin-left: 20px;
-}
-
-.logo:hover {
-    background: #33658a;
 }
 
 .btn {
@@ -54,29 +40,58 @@ button:focus {
     outline: none;
 }
 
-.delete-trick {
-    display: none;
-    position: absolute;
-    top: -10px;
-    left: -5px;
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    z-index: 100;
+input {
+    color: black;
 }
 
-.delete-trick:hover {
-    background: red;
+.submit {
+    display: block;
+    margin: 10px auto;
+}
+
+.google-sign-in {
+    background-color: #dd4b39;
+    margin-top: 20px;
+}
+
+a {
+    color: red;
+}
+
+
+/**********
+Header
+**********/
+
+header {
+    margin: 0 15px;
+}
+
+nav {
+    float: right;
+    margin-right: 20px;
+}
+
+.logo {
+    width: 150px;
+    margin-left: 20px;
+}
+
+.logo:hover {
+    background: #33658a;
 }
 
 .selected {
     background-color: #787674
 }
 
-.submit {
-    display: block;
-    margin: 10px auto;
+
+/**********
+Dashboard - General
+**********/
+
+h2, h3 {
+    font-family: 'Roboto', sans-serif;
 }
 
 section {
@@ -91,6 +106,11 @@ article {
 p {
     margin-top: 10px;
 }
+
+
+/**********
+Training
+**********/
 
 .trick-name {
     text-align: center;
@@ -115,13 +135,6 @@ p {
     display: none;
 }
 
-.meal {
-    box-sizing: border-box;
-    width: 94%;
-    height: 100px;
-    margin: 10px 2%;
-}
-
 .progress-bar {
     width: 100%;
     height: 25px;
@@ -129,6 +142,10 @@ p {
     right: 0;
     bottom: -1px;
     border-radius: 0 0 5% 5%;
+}
+
+.trick-name {
+    margin-right: 30px;
 }
 
 .key {
@@ -139,36 +156,46 @@ p {
     right: 0;
 }
 
-.trick-name {
-    margin-right: 30px;
+.delete-trick {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 100;
 }
+
+.delete-trick:hover {
+    background: red;
+}
+
+
+/**********
+Meals
+**********/
+
+.meal {
+    box-sizing: border-box;
+    width: 94%;
+    height: 100px;
+    margin: 10px 2%;
+}
+
+
+/**********
+Pet Care
+**********/
 
 .pet-care-button {
     margin: 15px;
     padding: 10px;
 }
 
-.google-sign-in {
-    background-color: #dd4b39;
-    margin-top: 20px;
-}
-
-body {
-    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dog.jpeg');
-    color: white;
-    background-position: center top;
-}
-
-input {
-    color: black;
-}
-
 .pet-care li {
     color: black;
-}
-
-a {
-    color: red;
 }
 
 
