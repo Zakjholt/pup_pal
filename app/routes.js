@@ -169,13 +169,12 @@ module.exports = function(app, passport) {
         if (!(req.user.pupName || req.user.palName)) {
             console.log('redirecting to onboard!');
             res.redirect('/onboard');
-
+        } else {
+            console.log('Rendering Main');
+            res.render('main.ejs', {
+                user: req.user
+            });
         }
-        console.log('Rendering Main');
-        res.render('main.ejs', {
-            user: req.user
-        });
-
     });
 
 
