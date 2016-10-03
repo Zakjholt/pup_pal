@@ -1,5 +1,15 @@
 body {
-    padding-top: 10px;
+    padding-top: 25px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+}
+
+header {
+  margin: 0 15px;
+}
+
+h2, h3 {
+  font-family: 'Roboto', sans-serif;
 }
 
 ul {
@@ -90,10 +100,12 @@ p {
 }
 
 .trick {
-    box-sizing: border-box;
     height: 100px;
     width: 100%;
+    box-shadow: 0px 0px 2px 2px rgba(44,65,78,1);
 }
+
+
 
 .trick-container {
     position: relative;
@@ -122,6 +134,11 @@ p {
     border-radius: 0 0 5% 5%;
 }
 
+.trick .key {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
 .trick-name {
     margin-right: 30px;
 }
@@ -137,29 +154,24 @@ p {
 }
 
 body {
-    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dogs.jpeg');
+    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dog.jpeg');
     color: white;
+    background-position: center top;
+}
+
+input {
+  color: black;
 }
 
 .pet-care li {
   color: black;
 }
 
-.pet-care a {
+a {
   color: red;
 }
 
-/*Tablet/Small laptop*/
 
-@media (max-width: 850px) {
-    .trick-container {
-        width: 45%
-    }
-    .container {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
-}
 
 
 /*Mobile*/
@@ -182,4 +194,26 @@ body {
     .add-trick {
         margin-top: 10px;
     }
+}
+
+/*Tablet/Small laptop*/
+
+@media (max-width: 850px) {
+    .trick-container {
+        width: 45%
+    }
+    .container {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .meal {
+      font-size: .6em;
+    }
+}
+
+/*Excessively large screens*/
+@media (min-width: 2000px) {
+  body {
+    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/dog-highres.jpeg');
+    margin: 0 auto;
 }
