@@ -169,6 +169,7 @@ module.exports = function(app, passport) {
         if (!(req.user.pupName || req.user.palName)) {
             res.redirect('/onboard');
         }
+
         res.render('main.ejs', {
             user: req.user
         });
