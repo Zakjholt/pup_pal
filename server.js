@@ -10,7 +10,6 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
 var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.url);
@@ -32,6 +31,7 @@ app.use(passport.session());
 app.use(flash());
 
 require('./app/routes.js')(app, passport);
+
 
 app.listen(process.env.PORT || 8080, function() {
     console.log("server is running at http://localhost:" + port);

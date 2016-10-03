@@ -1,6 +1,12 @@
 var User = require('./models/user');
-var Trick = require('./models/trick');
+var twilio = require('twilio');
+var client = twilio('ACb98f0967f2cc6b856e2ffd3c0e79be8e', '2a6c482f377f1f0861164bf730c880b0');
 var moment = require('moment');
+var cron = require('node-cron');
+
+//Check to send twilio messages
+var cron = require('node-cron');
+
 
 module.exports = function(app, passport) {
 
@@ -51,7 +57,8 @@ module.exports = function(app, passport) {
         }, {
             $set: {
                 'palName': req.body.palName,
-                'pupName': req.body.pupName
+                'pupName': req.body.pupName,
+                'cellNumber': req.body.cellNumber
             }
         }, function() {
             res.sendStatus(204);
@@ -62,14 +69,30 @@ module.exports = function(app, passport) {
     app.post('/meal', function(req, res) {
         console.log(req.body);
         User.findOneAndUpdate({
-            '_id': req.user._id
-        }, {
-            $currentDate: {
-                'mealTime': true
+                '_id': req.user._id
+            }, {
+                $currentDate: {
+                    'mealTime': true
+                },
             },
-        }, function() {
-            res.sendStatus(204);
-        });
+            function(err, user) {
+                if (err) throw err;
+                //Add an && some value equals true to give users the option to not receive texts
+                if (user.cellNumber) {
+                    var outsideNote = cron.schedule('*/20 * * * *', function() {
+                        client.sendMessage({
+                            to: user.cellNumber,
+                            from: '12402057908',
+                            body: 'It\'s time to take ' + user.pupName + ' outside!'
+                        });
+                        console.log('Text message reminder sent!');
+                        outsideNote.stop();
+                    });
+                    outsideNote.start();
+                }
+                res.sendStatus(204);
+            });
+
     });
 
     //Handle trick posts
@@ -92,11 +115,32 @@ module.exports = function(app, passport) {
             });
     });
 
+    //Handle the delete trick requests
+    app.delete('/tricks/:trick', function(req, res) {
+        var trick = req.params.trick;
+        var id = req.user._id;
+        User.findOne({
+            '_id': id
+        }, function(err, user) {
+            if (err) return handleError(err);
+            console.log(user.tricks[trick]);
+            delete user.tricks[trick];
+            console.log(user.tricks);
+            user.markModified('tricks');
+            user.save(function(err) {
+                console.log('Save function ran');
+                if (err)
+                    handleError(res, err);
+                res.sendStatus(200);
+
+            });
+        });
+    });
+
     app.get('/main', isLoggedIn, function(req, res) {
         var id = req.user._id;
 
         ///Checks to see if it's the day after the last trick time;
-
         User.findById(id, function(err, user) {
             if (err) return handleError(err);
             var now = moment();
@@ -104,7 +148,15 @@ module.exports = function(app, passport) {
             if (user.trickTime) {
                 if (moment(now).isAfter(user.trickTime, 'day')) {
                     console.log("Tricks reset!");
-                    user.tricks = {};
+                    for (var i in user.tricks) {
+                        if (user.tricksRecord && user.tricks.i > user.tricksRecord.i) {
+                            user.tricksRecord.i = user.tricks.i;
+                        } else if (!(user.tricksRecord)) {
+                            user.tricksRecord = {};
+                            user.tricksRecord.i = user.tricks.i;
+                        }
+                        user.tricks.i = 0;
+                    }
                 }
             }
             //Reset Meal Time Daily
@@ -115,6 +167,7 @@ module.exports = function(app, passport) {
                 }
             }
             //Updates the user with the changes
+            user.markModified('tricks');
             user.save(function(err) {
                 if (err) return handleError(err);
             });
