@@ -77,8 +77,8 @@ module.exports = function(app, passport) {
             },
             function(err, user) {
                 if (err) throw err;
-                //Add an && some value equals true to give users the option to not receive texts
-                if (user.cellNumber) {
+                if (user.cellNumber && req.body.sendText === 'true') {
+                    console.log('sending text');
                     var outsideNote = cron.schedule('*/20 * * * *', function() {
                         client.sendMessage({
                             to: user.cellNumber,
