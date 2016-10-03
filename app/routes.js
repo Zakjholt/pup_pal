@@ -4,9 +4,6 @@ var client = twilio('ACb98f0967f2cc6b856e2ffd3c0e79be8e', '2a6c482f377f1f0861164
 var moment = require('moment');
 var cron = require('node-cron');
 
-//Check to send twilio messages
-var cron = require('node-cron');
-
 
 module.exports = function(app, passport) {
 
@@ -50,8 +47,6 @@ module.exports = function(app, passport) {
 
     //Process the onboarding user info (Your name and dog's name)
     app.post('/onboard', function(req, res) {
-        console.log(req.body);
-        console.log(req.user);
         User.findOneAndUpdate({
             '_id': req.user._id
         }, {
@@ -67,7 +62,6 @@ module.exports = function(app, passport) {
 
     //Handling meal time posts
     app.post('/meal', function(req, res) {
-        console.log(req.body);
         User.findOneAndUpdate({
                 '_id': req.user._id
             }, {
@@ -77,6 +71,7 @@ module.exports = function(app, passport) {
             },
             function(err, user) {
                 if (err) throw err;
+                //Starts a cron function to send twilio message after 20 minutes
                 if (user.cellNumber && req.body.sendText === 'true') {
                     console.log('sending text');
                     var outsideNote = cron.schedule('*/20 * * * *', function() {
@@ -100,6 +95,7 @@ module.exports = function(app, passport) {
 
         var trick = req.params.trick;
         var field = 'tricks.' + trick;
+        //Increments the trick counter when buttons are clicked
         User.findOneAndUpdate({
                 _id: req.user._id
             }, {
@@ -123,12 +119,9 @@ module.exports = function(app, passport) {
             '_id': id
         }, function(err, user) {
             if (err) return handleError(err);
-            console.log(user.tricks[trick]);
             delete user.tricks[trick];
-            console.log(user.tricks);
             user.markModified('tricks');
             user.save(function(err) {
-                console.log('Save function ran');
                 if (err)
                     handleError(res, err);
                 res.sendStatus(200);
@@ -147,7 +140,6 @@ module.exports = function(app, passport) {
             // Reset Trick Counters Daily
             if (user.trickTime) {
                 if (moment(now).isAfter(user.trickTime, 'day')) {
-                    console.log("Tricks reset!");
                     for (var i in user.tricks) {
                         if (user.tricksRecord && user.tricks.i > user.tricksRecord.i) {
                             user.tricksRecord.i = user.tricks.i;
@@ -162,7 +154,6 @@ module.exports = function(app, passport) {
             //Reset Meal Time Daily
             if (user.mealTime) {
                 if (moment(now).isAfter(user.mealTime, 'day')) {
-                    console.log("Mealtime Reset!");
                     user.mealTime = undefined;
                 }
             }
@@ -179,12 +170,6 @@ module.exports = function(app, passport) {
             res.redirect('/onboard');
         }
         res.render('main.ejs', {
-            user: req.user
-        });
-    });
-
-    app.get('/settings', isLoggedIn, function(req, res) {
-        res.render('settings', {
             user: req.user
         });
     });

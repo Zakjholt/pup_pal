@@ -71,7 +71,6 @@ $('.training').on('mouseenter', '.trick-container', function() {
 $('.training').on('click', '.delete-trick', function(event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('delete!');
     var trickName = $(this).siblings('.trick').find('.key').text().toLowerCase();
     console.log(trickName);
     $(this).closest('div').remove();
@@ -91,7 +90,6 @@ $(document).ready(function() {
 
 //Function expects the tricks object
 function makeCards(tricks) {
-    console.log(tricks);
     if ($.isEmptyObject(tricks)) {
         tricks = {
             'sit': 0,
