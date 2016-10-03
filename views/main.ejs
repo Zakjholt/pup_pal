@@ -1,63 +1,138 @@
 <% include includes/header.ejs %>
-<h2>Dashboard</h2>
-  <div class="container">
-    <ul>
-      <li><button id="training" class="btn navbar-btn">Training</button></li>
-      <li><button id="meal-tracking" class="btn navbar-btn">Meal Tracking</button></li>
-      <li><button id="care-schedule" class="btn navbar-btn">Pet Care Schedule</button></li>
-      <li><button id="account-info" class="btn navbar-btn">Account Info</button></li>
-    </ul>
-  </div>
+<!-- Gives the user to js -->
+<input type="hidden" id="user" value="<%= JSON.stringify(user) %>"/>
 
-  <div class="row section account-info">
-    <a href="/logout">Logout</a>
-    <a href="/onboard">Onboard</a>
-    <a href="/settings">Account Settings</a>
-  </div>
-
-
-
-<div class="row section training">
-  <button class="btn trick"><span class="key">Sit</span>
-<div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.sit ? user.tricks.sit : 0 %></span></div>
-  </button>
-  <button class="btn trick"><span class="key">Down</span>
-<div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.down ? user.tricks.down : 0 %></span></div>
-  </button>
-  <button class="btn trick"><span class="key">Stay</span>
-  <div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.stay ? user.tricks.stay : 0 %></span></div>
-  </button>
-  <button class="btn trick"><span class="key">Come</span>
-  <div class="progress-bar">Times Completed: <span class="count"><%= user.tricks && user.tricks.come ? user.tricks.come : 0 %></span></div>
-</button>
-</div>
-
- <div class="row section meal-tracking">
-   <button class="btn meal">Meal <br> Last Meal: <span class="last-meal"> <%= user.mealTime ? moment(user.mealTime).format("dddd, h:mm A") : "No meals logged yet today!"%> </span></button>
-
-  <div class="well">
-    <p>
-     <strong>Take <%= user.pupName %> out at</strong>: <span class="countdown"> <%=user.mealTime ? moment(user.mealTime).add(20, 'minutes').format('h:mm A') : "Log a meal to get a reminder" %></span>
-    </p>
-  </div>
-
-</div>
-
-
-
-<div class="row section account-info">
-  <!-- LOCAL INFORMATION -->
-  <div class="col-sm-12">
-      <div class="well">
-              <p>
-                  <strong>email</strong>: <%= user.local.email %><br>
-                  <strong>Name</strong>: <%= user.palName %><br>
-                  <strong>Dog's Name</strong>: <%= user.pupName %><br>
-              </p>
-
-      </div>
+    <h2>Dashboard</h2>
+    <div class='dash-controls'>
+        <div class='well container'>
+            <ul>
+                <li><button id='training' class='btn navbar-btn'>Training</button></li>
+                <li><button id='meal-tracking' class='btn navbar-btn'>Meal Tracking</button></li>
+                <li><button id='pet-care' class='btn navbar-btn'>Pet Care</button></li>
+                <li><button id='account-info' class='btn navbar-btn'>Account Info</button></li>
+            </ul>
+        </div>
     </div>
-</div>
-<script src="js/moment.min.js"></script>
-<script src="js/main.js" charset="utf-8"></script>
-<% include includes/footer.ejs %>
+
+
+
+
+    <section class='row training'>
+        <p>
+            Here you can track your pet's daily trick training progress! We've loaded up four basic commands to get you started. Just click the buttons to mark successful attempts! The counters will reset daily.
+        </p>
+        <div class="col-sm-12 well"><input type="text" class="trick-name"><button class="btn btn-default add-trick">Add a Trick</button>
+        </div>
+    </section>
+
+    <!--Template to use for creating new trick buttons-->
+    <div class="template trick-container">
+      <button class="delete-trick">X</button>
+      <button class="btn btn-default trick">
+        <span class="key"></span>
+        <div class="progress-bar">Times Completed: <span class="count"></span></div>
+      </button>
+    </div>
+
+
+    <section class='row meal-tracking'>
+        <p>
+            Log your pet's feeding time with the click of a button! You'll also see a recommendation of when to take your dog out based on when they eat.
+        </p>
+        <button class='btn meal'>Meal <br> Last Meal: <span class='last-meal'> <%= user.mealTime ? moment(user.mealTime).format('dddd, h:mm A') : 'No meals logged yet today!'%> </span></button>
+
+        <div class='well'>
+            <p>
+                <strong>Take <%= user.pupName %> out at</strong>: <span class='countdown'> <%=user.mealTime ? moment(user.mealTime).add(20, 'minutes').format('h:mm A') : 'Log a meal to get a reminder' %></span>
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class='row well pet-care'>
+        <button class='pet-care-button btn-default'>Vaccination Schedule</button>
+        <button class='pet-care-button btn-default'>Grooming Schedule</button>
+        <button class='pet-care-button btn-default'>Food Reviews</button>
+        <article class='Vaccination-Schedule'>
+            <ul>
+                <ul class='list-group'>
+                    <h3>6-8 weeks</h3>
+                    <li class='list-group-item'>Distemper</li>
+                    <li class='list-group-item'>Measles</li>
+                    <li class='list-group-item'>Parainfluenza</li>
+                </ul>
+                <ul class='list-group'>
+                    <h3>10-12 weeks</h3>
+                    <li class='list-group-item'>DHPP</li>
+                </ul>
+                <ul class='list-group'>
+                    <h3>10-12 weeks</h3>
+                    <li class='list-group-item'>Rabies</li>
+                </ul>
+                <ul class='list-group'>
+                    <h3>14-16 weeks</h3>
+                    <li class='list-group-item'>DHPP</li>
+                </ul>
+                <ul class='list-group'>
+                    <h3>Every 1-2 Years</h3>
+                    <li class='list-group-item'>Rabies</li>
+                    <li class='list-group-item'>DHPP</li>
+                </ul>
+            </ul>
+        </article>
+        <article class='Grooming-Schedule'>
+            <ul class='list-group'>
+                <li class='list-group-item'>
+                    <h3>Brushing</h3>
+                    <li class='list-group-item'>Long-Haired Dogs: <strong>Daily</strong></li>
+                    <li class='list-group-item'>Medium-Haired Dogs: <strong>Weekly</strong></li>
+                    <li class='list-group-item'>Short-Haired Dogs: <strong>Monthly</strong></li>
+                </li>
+            </ul>
+            <h3>Nail Trimming</h3>
+            <ul class='list-group'>
+                <li class='list-group-item'>Every: <strong>2 Weeks</strong></li>
+            </ul>
+            <ul class="list-group">
+                <h3>Haircuts</h3>
+                <li class='list-group-item'>Dogs with continuously growing hair (Poodle, Shih Tzu) Every: <strong>3 Weeks</strong></li>
+                <li class='list-group-item'>Short haired dogs: <strong>Never</strong></li>
+            </ul>
+        </article>
+
+        <article class="Food-Reviews">
+            <p>
+                As with people, what dogs eat does play a vital role in their overall health. It is therefore your responsibility as a pet owner to do your research before choosing a food. <br> For unbiased reviews and nutrition information, visit:
+                <a href="http://www.dogfoodadvisor.com/best-dog-foods/">Dog Food Advisor</a>
+            </p>
+        </article>
+    </section>
+
+
+    <section class='row account-info'>
+        <!-- LOCAL INFORMATION -->
+        <div>
+            <a href='/logout'>Logout</a>
+            <a href='/onboard'>Onboard</a>
+            <a href='/settings'>Account Settings</a>
+
+        </div>
+        <div class='col-sm-12'>
+            <div class='well'>
+                <p>
+                    <strong>Name</strong>:
+                    <%= user.palName %><br>
+                        <strong>Dog's Name</strong>:
+                        <%= user.pupName %><br>
+                            <strong>email</strong>:
+                            <%= user.local.email || user.google.email %><br>
+                                <strong>Cell</strong>:
+                                <%= user.cellNumber %><br>
+                </p>
+            </div>
+        </div>
+    </section>
+    <script src='js/moment.min.js'></script>
+    <script src='js/main.js' charset='utf-8'></script>
+    <% include includes/footer.ejs %>

@@ -14,9 +14,16 @@
       <a href="/main"><img src="images/logo.png" alt="PupPal logo" class="logo"></a>
       <nav>
         <ul>
-          <li><a class="btn btn-default" href="/login">Login</a></li>
-          <li><a class="btn btn-default" href="/signup">Signup</a></li>
-        </ul>
+                <li class="linkNav">
+                <% if(user) { %>
+                    <a class="btn btn-default" href="/logout">Logout</a>
+                <% } else { %>
+                    <a class="btn btn-default" href="/signup">Sign Up</a>
+                    <a class="btn btn-default" href="/login">Login</a>
+                <% } %>
+                </li>
+            </ul>
+
       </nav>
     </header>
     <div class="container text-center">

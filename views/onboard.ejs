@@ -1,11 +1,15 @@
 <% include includes/header.ejs %>
-<h2>Onboarding</h2>
-<div class="questions">
-  <form class="user-info">
-    <input type="text" id="pal-name" placeholder="Your Name">
-    <input type="text" id="pup-name" placeholder="Dog's Name">
-    <button class="btn submit">Submit</button>
-  </form>
-</div>
-<script src="js/onboard.js" charset="utf-8"></script>
-<% include includes/footer.ejs %>
+    <h2>Onboarding</h2>
+    <div class="questions">
+        <form class="user-info">
+            <input type="text" id="pal-name" placeholder="Your Name">
+            <input type="text" id="pup-name" placeholder="Dog's Name">
+            <input type="text" id="cell-number" placeholder="Cell Number (optional)">
+            <button class="btn submit">Submit</button>
+            <p>
+                We will only use your cell number to send optional reminders for your dog's meal and walk times.
+            </p>
+        </form>
+    </div>
+    <script src="js/onboard.js" charset="utf-8"></script>
+    <% include includes/footer.ejs %>
