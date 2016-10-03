@@ -168,9 +168,10 @@ module.exports = function(app, passport) {
         //Automatically sends to onboarding if data is missing
         if (!(req.user.pupName || req.user.palName)) {
             res.redirect('/onboard');
-        }
-        res.render('main.ejs', {
+        } else {   
+         res.render('main.ejs', {
             user: req.user
+            }
         });
     });
 
